@@ -187,32 +187,34 @@ const Header = () => {
 								/>
 							</span>
 						</Link>
-						<div
-							className="dropdown-menu d-block"
-							style={{ transform: "translate(-139px,0px)" }}>
-							<div className="user-header">
-								<div className="avatar avatar-sm">
-									<img
-										src={Profile}
-										alt="User Image"
-										className="avatar-img rounded-circle"
-									/>
+						{isOpen && (
+							<div
+								className="dropdown-menu d-block"
+								style={{ transform: "translate(-139px,0px)" }}>
+								<div className="user-header">
+									<div className="avatar avatar-sm">
+										<img
+											src={Profile}
+											alt="User Image"
+											className="avatar-img rounded-circle"
+										/>
+									</div>
+									<div className="user-text">
+										<h6>Ryan Taylor</h6>
+										<p className="text-muted mb-0">Administrator</p>
+									</div>
 								</div>
-								<div className="user-text">
-									<h6>Ryan Taylor</h6>
-									<p className="text-muted mb-0">Administrator</p>
-								</div>
+								<Link className="dropdown-item" href="profile.html">
+									My Profile
+								</Link>
+								<Link className="dropdown-item" href="settings.html">
+									Settings
+								</Link>
+								<Link className="dropdown-item" href="login.html">
+									Logout
+								</Link>
 							</div>
-							<Link className="dropdown-item" href="profile.html">
-								My Profile
-							</Link>
-							<Link className="dropdown-item" href="settings.html">
-								Settings
-							</Link>
-							<Link className="dropdown-item" href="login.html">
-								Logout
-							</Link>
-						</div>
+						)}
 					</li>
 				</ul>
 			</div>
