@@ -1,8 +1,16 @@
-import Profile from "../../assets/img/profiles/avatar-01.jpg";
-import Logo from "../../assets/img/logo.png";
-import LogoSmal from "../../assets/img/logo-small.png";
 import { Link } from "react-router-dom";
+import doctor1 from "../../assets/img/doctors/doctor-thumb-01.jpg";
+import doctor2 from "../../assets/img/doctors/doctor-thumb-02.jpg";
+import { default as doctor3, default as doctor4 } from "../../assets/img/doctors/doctor-thumb-03.jpg";
+import LogoSmal from "../../assets/img/logo-small.png";
+import Logo from "../../assets/img/logo.png";
+import Profile from "../../assets/img/profiles/avatar-01.jpg";
+
+import './Header.scss';
+import useDropDownPopup from "../../hooks/useDropDownPopup";
 const Header = () => {
+
+	const { isOpen, toogleMenu, dorpDownRef } = useDropDownPopup();
 	return (
 		<>
 			<div className="header">
@@ -45,7 +53,9 @@ const Header = () => {
 							<i className="fe fe-bell"></i>{" "}
 							<span className="badge badge-pill">3</span>
 						</Link>
-						<div className="dropdown-menu notifications">
+						<div
+							className="dropdown-menu notifications d-nonefa"
+							style={{ transform: "translate(-305px, 0px)" }}>
 							<div className="topnav-dropdown-header">
 								<span className="notification-title">Notifications</span>
 								<Link to="javascript:void(0)" className="clear-noti">
@@ -62,7 +72,7 @@ const Header = () => {
 													<img
 														className="avatar-img rounded-circle"
 														alt="User Image"
-														src="assets/img/doctors/doctor-thumb-01.jpg"
+														src={doctor4}
 													/>
 												</span>
 												<div className="media-body">
@@ -87,7 +97,7 @@ const Header = () => {
 													<img
 														className="avatar-img rounded-circle"
 														alt="User Image"
-														src="assets/img/patients/patient1.jpg"
+														src={doctor1}
 													/>
 												</span>
 												<div className="media-body">
@@ -112,7 +122,7 @@ const Header = () => {
 													<img
 														className="avatar-img rounded-circle"
 														alt="User Image"
-														src="assets/img/patients/patient2.jpg"
+														src={doctor2}
 													/>
 												</span>
 												<div className="media-body">
@@ -137,7 +147,7 @@ const Header = () => {
 													<img
 														className="avatar-img rounded-circle"
 														alt="User Image"
-														src="assets/img/patients/patient3.jpg"
+														src={doctor3}
 													/>
 												</span>
 												<div className="media-body">
@@ -177,7 +187,9 @@ const Header = () => {
 								/>
 							</span>
 						</Link>
-						<div className="dropdown-menu">
+						<div
+							className="dropdown-menu d-block"
+							style={{ transform: "translate(-139px,0px)" }}>
 							<div className="user-header">
 								<div className="avatar avatar-sm">
 									<img
