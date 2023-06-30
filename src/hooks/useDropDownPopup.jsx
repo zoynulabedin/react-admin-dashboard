@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react";
 
 
 const useDropDownPopup = () => {
@@ -6,7 +6,6 @@ const useDropDownPopup = () => {
 
     const dorpDownRef = useRef(null);
 
-      console.log(dorpDownRef);
     // toogle menu
     const toogleMenu = () => {
         setIsOpen(!isOpen);
@@ -19,7 +18,10 @@ const useDropDownPopup = () => {
     }
 
     useEffect( () => {
-      document.addEventListener("click", handleClickOUtside)
+      document.addEventListener("click", handleClickOUtside);
+      return () => {
+        document.removeEventListener("click", handleClickOUtside);
+      }
     },[])
   return { isOpen, toogleMenu, dorpDownRef };
 }

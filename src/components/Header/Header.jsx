@@ -11,6 +11,7 @@ import useDropDownPopup from "../../hooks/useDropDownPopup";
 const Header = () => {
 
 	const { isOpen, toogleMenu, dorpDownRef } = useDropDownPopup();
+		const { isOpen:isNotification, toogleMenu:toogleMenuNotificatin, dorpDownRef:dropDownRefNotification } = useDropDownPopup();
 	return (
 		<>
 			<div className="header">
@@ -45,7 +46,10 @@ const Header = () => {
 				</Link>
 
 				<ul className="nav user-menu">
-					<li className="nav-item dropdown noti-dropdown" onClick={toogleMenu}>
+					<li
+						className="nav-item dropdown noti-dropdown"
+						onClick={toogleMenuNotificatin}
+						ref={dropDownRefNotification}>
 						<Link
 							to="#"
 							className="dropdown-toggle nav-link"
@@ -53,7 +57,7 @@ const Header = () => {
 							<i className="fe fe-bell"></i>{" "}
 							<span className="badge badge-pill">3</span>
 						</Link>
-						{isOpen && (
+						{isNotification && (
 							<div
 								className="dropdown-menu notifications d-block"
 								style={{ transform: "translate(-305px, 0px)" }}>
@@ -180,7 +184,10 @@ const Header = () => {
 						)}
 					</li>
 
-					<li className="nav-item dropdown has-arrow" ref={dorpDownRef} onClick={toogleMenu}>
+					<li
+						className="nav-item dropdown has-arrow"
+						ref={dorpDownRef}
+						onClick={toogleMenu}>
 						<Link
 							to="#"
 							className="dropdown-toggle nav-link"
