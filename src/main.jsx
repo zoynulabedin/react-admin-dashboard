@@ -5,7 +5,8 @@ import './assets/css/bootstrap.min.css'
 import "./assets/css/feathericon.min.css"
 import "./assets/css/select2.min.css";
 import "./assets/css/style.css";
-import './index.css'
+import './index.css';
+import './assets/plugins/datatables/datatables.min.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

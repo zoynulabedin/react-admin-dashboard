@@ -11,7 +11,11 @@
 		"push": "git add . && git commit -m \"update\" && git push"
 	},
 	"dependencies": {
+		"@z-avanes/bootstrap-4-rtl": "^4.2.2",
+		"bootstrap": "^5.3.0",
+		"datatables.net-dt": "^1.13.4",
 		"react": "^18.2.0",
+		"react-bootstrap": "^2.8.0",
 		"react-dom": "^18.2.0",
 		"react-icons": "^4.10.1",
 		"react-router-dom": "^6.14.0",
@@ -22,7 +26,7 @@
 		"@types/react-dom": "^18.0.11",
 		"@vitejs/plugin-react-swc": "^3.0.0",
 		"eslint": "^8.38.0",
-		"eslint-plugin-react": "^7.32.2",
+		"eslint-plugin-react": "^7.25.3",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.3.4",
 		"vite": "^4.3.9"
