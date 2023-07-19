@@ -6,12 +6,22 @@ import LogoSmal from "../../assets/img/logo-small.png";
 import Logo from "../../assets/img/logo.png";
 import Profile from "../../assets/img/profiles/avatar-01.jpg";
 
-import './Header.scss';
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../features/auth/authApiSlice";
 import useDropDownPopup from "../../hooks/useDropDownPopup";
+import './Header.scss';
 const Header = () => {
+
+	const dispatch = useDispatch();
+	
 
 	const { isOpen, toogleMenu, dorpDownRef } = useDropDownPopup();
 		const { isOpen:isNotification, toogleMenu:toogleMenuNotificatin, dorpDownRef:dropDownRefNotification } = useDropDownPopup();
+	const handleUserLoggout = (e) => {
+		e.preventDefault();
+		dispatch(logoutUser());
+
+	};
 	return (
 		<>
 			<div className="header">
@@ -224,7 +234,7 @@ const Header = () => {
 								<Link className="dropdown-item" href="settings.html">
 									Settings
 								</Link>
-								<Link className="dropdown-item" href="login.html">
+								<Link className="dropdown-item" onClick={handleUserLoggout}>
 									Logout
 								</Link>
 							</div>
