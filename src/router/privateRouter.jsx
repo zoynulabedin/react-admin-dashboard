@@ -1,6 +1,7 @@
 import Layout from "../components/Layout/Layout";
 import Users from "../pages/Users/Users";
 import Dashboard from "../pages/dashboard/Dashboard";
+import PrivateGuard from "./privateGurad";
 
 // create private router
 const privateRouter = [
@@ -8,13 +9,18 @@ const privateRouter = [
 		element: <Layout />,
 		children: [
 			{
-				path: "/",
-				element: <Dashboard />,
+				element: <PrivateGuard />,
+				children: [
+					{
+						path: "/",
+						element: <Dashboard />,
+					},
+					{
+						path: "/users",
+						element: <Users />,
+					},
+				],
 			},
-            {
-                path: "/users",
-                element: <Users />,
-            }
 		],
 	},
 ];

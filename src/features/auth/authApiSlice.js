@@ -42,3 +42,15 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
 		throw new Error(error.response.data.message);
 	}
 });
+
+// login user
+export const loggedInUser = createAsyncThunk("auth/loggedInUser", async () => {
+	try {
+		const response = await axios.get("http://localhost:5050/api/v1/auth/me", {
+			withCredentials: true,
+		});
+		return response.data;
+	} catch (error) {
+		throw new Error(error.response.data.message);
+	}
+});

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineGooglePlus } from "react-icons/ai";
 import { BiLogoFacebook } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Logo from "../../assets/img/logo.png";
 import { loginUser } from "../../features/auth/authApiSlice";
 import { setMessageEmpty } from "../../features/auth/authSlice";
