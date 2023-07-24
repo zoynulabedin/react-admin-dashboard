@@ -1,4 +1,5 @@
 import Layout from "../components/Layout/Layout";
+import { Profile } from "../pages/Profile/Profile";
 import Users from "../pages/Users/Users";
 import Dashboard from "../pages/dashboard/Dashboard";
 import PrivateGuard from "./privateGurad";
@@ -18,6 +19,10 @@ const privateRouter = [
 					{
 						path: "/users",
 						element: <Users />,
+					},
+					{
+						path: "/profile",
+						element: <Profile />,
 					},
 				],
 			},

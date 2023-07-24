@@ -54,3 +54,41 @@ export const loggedInUser = createAsyncThunk("auth/loggedInUser", async () => {
 		throw new Error(error.response.data.message);
 	}
 });
+
+// change password
+export const passwordChange = createAsyncThunk(
+	"auth/passwordChange",
+	async (data) => {
+		try {
+			const response = await axios.post(
+				"http://localhost:5050/api/v1/auth/change-password",
+				data,
+				{
+					withCredentials: true,
+				}
+			);
+			return response.data;
+		} catch (error) {
+			throw new Error(error.response.data.message);
+		}
+	}
+);
+
+// change password
+export const profileUpdate = createAsyncThunk(
+	"auth/profileUpdate",
+	async (data) => {
+		try {
+			const response = await axios.post(
+				"http://localhost:5050/api/v1/auth/profile-update",
+				data,
+				{
+					withCredentials: true,
+				}
+			);
+			return response.data;
+		} catch (error) {
+			throw new Error(error.response.data.message);
+		}
+	}
+);

@@ -4,16 +4,20 @@ import doctor2 from "../../assets/img/doctors/doctor-thumb-02.jpg";
 import { default as doctor3, default as doctor4 } from "../../assets/img/doctors/doctor-thumb-03.jpg";
 import LogoSmal from "../../assets/img/logo-small.png";
 import Logo from "../../assets/img/logo.png";
-import Profile from "../../assets/img/profiles/avatar-01.jpg";
 
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../features/auth/authApiSlice";
+
+import useAuth from "../../hooks/useAuth";
 import useDropDownPopup from "../../hooks/useDropDownPopup";
 import './Header.scss';
 const Header = () => {
 
-	const dispatch = useDispatch();
 	
+
+	const dispatch = useDispatch();
+const { user } = useAuth();
+
 
 	const { isOpen, toogleMenu, dorpDownRef } = useDropDownPopup();
 		const { isOpen:isNotification, toogleMenu:toogleMenuNotificatin, dorpDownRef:dropDownRefNotification } = useDropDownPopup();
@@ -199,13 +203,17 @@ const Header = () => {
 						ref={dorpDownRef}
 						onClick={toogleMenu}>
 						<Link
-							to="#"
+							to="/profile"
 							className="dropdown-toggle nav-link"
 							data-toggle="dropdown">
 							<span className="user-img">
 								<img
 									className="rounded-circle"
-									src={Profile}
+									src={
+										user?.photo
+											? user.photo
+											: "https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg="
+									}
 									width="31"
 									alt="Ryan Taylor"
 								/>
@@ -218,17 +226,21 @@ const Header = () => {
 								<div className="user-header">
 									<div className="avatar avatar-sm">
 										<img
-											src={Profile}
+											src={
+												user?.photo
+													? user.photo
+													: "https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg="
+											}
 											alt="User Image"
 											className="avatar-img rounded-circle"
 										/>
 									</div>
 									<div className="user-text">
-										<h6>Ryan Taylor</h6>
-										<p className="text-muted mb-0">Administrator</p>
+										<h6>{user?.name}</h6>
+										<p className="text-muted mb-0">{user?.role}</p>
 									</div>
 								</div>
-								<Link className="dropdown-item" href="profile.html">
+								<Link className="dropdown-item" to="/profile">
 									My Profile
 								</Link>
 								<Link className="dropdown-item" href="settings.html">

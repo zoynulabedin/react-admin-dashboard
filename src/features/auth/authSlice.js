@@ -4,13 +4,15 @@ import {
 	loggedInUser,
 	loginUser,
 	logoutUser,
+	passwordChange,
+	profileUpdate,
 } from "./authApiSlice";
 
 const authSlice = createSlice({
 	name: "auth",
 	initialState: {
-		user: localStorage.getItem("user")
-			? JSON.parse(localStorage.getItem("user"))
+		user: sessionStorage.getItem("user")
+			? JSON.parse(sessionStorage.getItem("user"))
 			: null,
 		loading: false,
 		message: null,
@@ -70,18 +72,37 @@ const authSlice = createSlice({
 		});
 
 		builder.addCase(loggedInUser.fulfilled, (state, action) => {
-			console.log(action);
 			state.loading = false;
 			state.user = action.payload;
-			localStorage.setItem("user", JSON.stringify(action.payload));
+			sessionStorage.setItem("user", JSON.stringify(action.payload));
 		});
 
 		builder.addCase(loggedInUser.rejected, (state, action) => {
 			state.error = action.error.message;
 			state.loading = false;
 		});
+
+		builder.addCase(passwordChange.fulfilled, (state, action) => {
+			state.message = action.payload.message;
+			sessionStorage.setItem("user", JSON.stringify(action.payload));
+		});
+
+		builder.addCase(passwordChange.rejected, (state, action) => {
+			state.error = action.error.message;
+		});
+
+		builder.addCase(profileUpdate.fulfilled, (state, action) => {
+			state.message = action.payload.message;
+			sessionStorage.setItem("user", JSON.stringify(action.payload));
+		});
+
+		builder.addCase(profileUpdate.rejected, (state, action) => {
+			state.error = action.error.message;
+		});
 	},
 });
+
+export const getAuthData = (state) => state.auth;
 
 export const { setMessageEmpty } = authSlice.actions;
 //export
