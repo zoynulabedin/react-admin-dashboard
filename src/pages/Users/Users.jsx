@@ -17,12 +17,23 @@ const Users = () => {
 			<div className="row">
 				<div className="col-md-12">
 					<ModalPopup target="userModalPopup">
-						<p>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Accusantium nam atque tempora facilis libero asperiores laudantium
-							expedita molestias, reprehenderit ipsa recusandae consectetur? Et
-							officiis dolorem odio tenetur repellat sunt saepe!
-						</p>
+						<h4>Add Permission</h4>
+						<form >
+							<div className="my-3">
+								<input
+									type="text"
+									name="name"
+									
+									placeholder="Permission Name"
+									className="form-control"
+								/>
+							</div>
+							<div className="my-3">
+								<button type="submit" className="btn btn-primary btn-block">
+									Add
+								</button>
+							</div>
+						</form>
 					</ModalPopup>
 					<div className="card card-table">
 						<div className="card-header d-flex justify-content-between">

@@ -7,6 +7,7 @@ import { passwordChange, profileUpdate } from '../../features/auth/authApiSlice'
 import { getAuthData, setMessageEmpty } from '../../features/auth/authSlice';
 import useAuth from '../../hooks/useAuth';
 import { createToasity } from '../../utility/toastify';
+import ImagePreview from '../../components/ImagePreview';
 export const Profile = () => {
 	const { user } = useAuth();
 	const dispatch = useDispatch();
@@ -242,25 +243,7 @@ const handleInfoSubmit = (e) => {
 						</div>
 					)}
 					<ModalPopup target="userProfilePhoto">
-						<form action="">
-							<div className="row form-row">
-								<div className="col-12">
-									<div className="form-group">
-										<label>Date of Birth</label>
-										<div className="cal-icon">
-											<input
-												type="file"
-												
-											/>
-										</div>
-									</div>
-								</div>
-								
-							</div>
-							<button type="submit" className="btn btn-primary btn-block">
-								Save Changes
-							</button>
-						</form>
+						<ImagePreview/>
 					</ModalPopup>
 					<ModalPopup target="userModalPopup">
 						<form onSubmit={handleInfoSubmit}>
