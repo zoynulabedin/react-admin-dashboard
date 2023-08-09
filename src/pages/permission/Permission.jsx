@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import ModalPopup from "../../components/ModalPopup/ModalPopup";
-import { createPermission, deletePermission, getPermission, updateStatusPermission } from "../../features/user/userApiSlice";
+import { createPermission, deletePermission, updateStatusPermission } from "../../features/user/userApiSlice";
 import { getAllPermissions, setMessageEmpty } from "../../features/user/userSlice";
-import { createToasity } from "../../utility/toastify";
 import { timeAgo } from "../../utility/timeago";
+import { createToasity } from "../../utility/toastify";
 const Permission = () => {
 	const dispatch = useDispatch();
 	const {permission,error, message} = useSelector(getAllPermissions);
-console.log(permission);
+
 	const [input, setInput] = useState({
 		"name" : ""
 	});
@@ -36,6 +36,7 @@ console.log(permission);
 	const handleFormsubmit = (e) => {
 		e.preventDefault();
 		dispatch(createPermission(input));
+		setInput({ name: ""});
 		
 	};
 	const handleStatus = (status, id) => {

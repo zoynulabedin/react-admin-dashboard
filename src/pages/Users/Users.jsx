@@ -1,13 +1,39 @@
 import DataTable from "datatables.net-dt";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import doct1 from "../../assets/img/doctors/doctor-thumb-01.jpg";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import ModalPopup from "../../components/ModalPopup/ModalPopup";
-
+import { createUser } from "../../features/user/userApiSlice";
+import useFormsFields from "../../hooks/useFormsFields";
+import generateRandomPassword from "../../utility/generatePassword";
 
 
 const Users = () => {
+	const dispatch = useDispatch();
+	const { input, handleInputchange, resetForm, setInput } = useFormsFields({
+		name: "",
+		email: "",
+		password: "",
+	});
 
+const [showPassword, setShowPassword] = useState('');
+ const handleTogglePassword = () => {
+ setShowPassword(!showPassword);
+}
+const handleRandomPassword = (e) => {
+	e.preventDefault();
+	setInput((prevState) => (
+		{
+		...prevState,
+		password: generateRandomPassword()
+		}
+		))
+	
+}
+
+const HandleUserSubmit = (e) => {
+	e.preventDefault();
+	dispatch(createUser(input));
+};
 	useEffect(() => {
 		new DataTable(".table");
 	},[]);
@@ -17,20 +43,50 @@ const Users = () => {
 			<div className="row">
 				<div className="col-md-12">
 					<ModalPopup target="userModalPopup">
-						<h4>Add Permission</h4>
-						<form >
+						<h4>Add User</h4>
+						<form onSubmit={HandleUserSubmit}>
 							<div className="my-3">
 								<input
 									type="text"
 									name="name"
-									
-									placeholder="Permission Name"
+									placeholder="Name"
+									value={input.name}
+									onChange={handleInputchange}
 									className="form-control"
 								/>
 							</div>
 							<div className="my-3">
+								<input
+									type="text"
+									name="email"
+									placeholder="Email"
+									value={input.email}
+									onChange={handleInputchange}
+									className="form-control"
+								/>
+							</div>
+							<div className="my-3">
+								<input
+									type={showPassword ? "text" : "password"}
+									name="password"
+									placeholder="Password"
+									value={input.password}
+									onChange={handleInputchange}
+									className="form-control"
+								/>
+								<label onClick={handleTogglePassword}>
+									<i className="fe fe-eye" aria-hidden="true"></i>
+								</label>
+							</div>
+							<div className="my-3 text-center">
+								<a
+									href=""
+									onClick={handleRandomPassword}
+									className="btn btn-info mb-2">
+									Generate Password
+								</a>
 								<button type="submit" className="btn btn-primary btn-block">
-									Add
+									Add New User
 								</button>
 							</div>
 						</form>
@@ -50,271 +106,42 @@ const Users = () => {
 								<table className="table table-hover table-center mb-0">
 									<thead>
 										<tr>
-											<th>Doctor Name</th>
-											<th>Speciality</th>
-											<th>Patient Name</th>
-											<th>Apointment Time</th>
+											<th>#</th>
+											<th>Name</th>
+											<th>Role</th>
+											<th>Email</th>
+											<th>created At</th>
 											<th>Status</th>
-											<th className="text-right">Amount</th>
+											<th className="text-right">Action</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
-											<td>
-												<h2 className="table-avatar">
-													<Link
-														href="profile.html"
-														className="avatar avatar-sm mr-2">
-														<img
-															className="avatar-img rounded-circle"
-															src={doct1}
-															alt="User Image"
-														/>
-													</Link>
-													<Link href="profile.html">Dr. Ruby Perrin</Link>
-												</h2>
-											</td>
-											<td>Dental</td>
-											<td>
-												<h2 className="table-avatar">
-													<Link
-														href="profile.html"
-														className="avatar avatar-sm mr-2">
-														<img
-															className="avatar-img rounded-circle"
-															src={doct1}
-															alt="User Image"
-														/>
-													</Link>
-													<Link href="profile.html">Charlene Reed </Link>
-												</h2>
-											</td>
-											<td>
-												9 Nov 2019{" "}
-												<span className="text-primary d-block">
-													11.00 AM - 11.15 AM
-												</span>
-											</td>
+											<td>01</td>
+											<td>zoynul</td>
+											<td>Admin</td>
+											<td>trustcodernet@gmail.com</td>
+											<td>1 min ago</td>
 											<td>
 												<div className="status-toggle">
 													<input
 														type="checkbox"
 														id="status_1"
 														className="check"
-														checked
 													/>
 													<label htmlFor="status_1" className="checktoggle">
 														checkbox
 													</label>
 												</div>
 											</td>
-											<td className="text-right">$200.00</td>
-										</tr>
-										<tr>
-											<td>
-												<h2 className="table-avatar">
-													<Link
-														href="profile.html"
-														className="avatar avatar-sm mr-2">
-														<img
-															className="avatar-img rounded-circle"
-															src={doct1}
-															alt="User Image"
-														/>
-													</Link>
-													<Link href="profile.html">Dr. Darren Elder</Link>
-												</h2>
+											<td className="text-right">
+												<button className="btn btn-warning mr-1">
+													<i className="fe fe-edit" aria-hidden="true"></i>
+												</button>
+												<button className="btn btn-danger">
+													<i className="fe fe-trash" aria-hidden="true"></i>
+												</button>
 											</td>
-											<td>Dental</td>
-											<td>
-												<h2 className="table-avatar">
-													<Link
-														href="profile.html"
-														className="avatar avatar-sm mr-2">
-														<img
-															className="avatar-img rounded-circle"
-															src={doct1}
-															alt="User Image"
-														/>
-													</Link>
-													<Link href="profile.html">Travis Trimble </Link>
-												</h2>
-											</td>
-
-											<td>
-												5 Nov 2019{" "}
-												<span className="text-primary d-block">
-													11.00 AM - 11.35 AM
-												</span>
-											</td>
-											<td>
-												<div className="status-toggle">
-													<input
-														type="checkbox"
-														id="status_2"
-														className="check"
-														checked
-													/>
-													<label htmlFor="status_2" className="checktoggle">
-														checkbox
-													</label>
-												</div>
-											</td>
-											<td className="text-right">$300.00</td>
-										</tr>
-										<tr>
-											<td>
-												<h2 className="table-avatar">
-													<Link
-														href="profile.html"
-														className="avatar avatar-sm mr-2">
-														<img
-															className="avatar-img rounded-circle"
-															src={doct1}
-															alt="User Image"
-														/>
-													</Link>
-													<Link href="profile.html">Dr. Deborah Angel</Link>
-												</h2>
-											</td>
-											<td>Cardiology</td>
-											<td>
-												<h2 className="table-avatar">
-													<Link
-														href="profile.html"
-														className="avatar avatar-sm mr-2">
-														<img
-															className="avatar-img rounded-circle"
-															src={doct1}
-															alt="User Image"
-														/>
-													</Link>
-													<Link href="profile.html">Carl Kelly</Link>
-												</h2>
-											</td>
-											<td>
-												11 Nov 2019{" "}
-												<span className="text-primary d-block">
-													12.00 PM - 12.15 PM
-												</span>
-											</td>
-											<td>
-												<div className="status-toggle">
-													<input
-														type="checkbox"
-														id="status_3"
-														className="check"
-														checked
-													/>
-													<label htmlFor="status_3" className="checktoggle">
-														checkbox
-													</label>
-												</div>
-											</td>
-											<td className="text-right">$150.00</td>
-										</tr>
-										<tr>
-											<td>
-												<h2 className="table-avatar">
-													<Link
-														href="profile.html"
-														className="avatar avatar-sm mr-2">
-														<img
-															className="avatar-img rounded-circle"
-															src={doct1}
-															alt="User Image"
-														/>
-													</Link>
-													<Link href="profile.html">Dr. Sofia Brient</Link>
-												</h2>
-											</td>
-											<td>Urology</td>
-											<td>
-												<h2 className="table-avatar">
-													<Link
-														href="profile.html"
-														className="avatar avatar-sm mr-2">
-														<img
-															className="avatar-img rounded-circle"
-															src={doct1}
-															alt="User Image"
-														/>
-													</Link>
-													<Link href="profile.html"> Michelle Fairfax</Link>
-												</h2>
-											</td>
-											<td>
-												7 Nov 2019
-												<span className="text-primary d-block">
-													1.00 PM - 1.20 PM
-												</span>
-											</td>
-											<td>
-												<div className="status-toggle">
-													<input
-														type="checkbox"
-														id="status_4"
-														className="check"
-														checked
-													/>
-													<label htmlFor="status_4" className="checktoggle">
-														checkbox
-													</label>
-												</div>
-											</td>
-											<td className="text-right">$150.00</td>
-										</tr>
-										<tr>
-											<td>
-												<h2 className="table-avatar">
-													<Link
-														href="profile.html"
-														className="avatar avatar-sm mr-2">
-														<img
-															className="avatar-img rounded-circle"
-															src={doct1}
-															alt="User Image"
-														/>
-													</Link>
-													<Link href="profile.html">Dr. Marvin Campbell</Link>
-												</h2>
-											</td>
-											<td>Orthopaedics</td>
-											<td>
-												<h2 className="table-avatar">
-													<Link
-														href="profile.html"
-														className="avatar avatar-sm mr-2">
-														<img
-															className="avatar-img rounded-circle"
-															src={doct1}
-															alt="User Image"
-														/>
-													</Link>
-													<Link href="profile.html">Gina Moore</Link>
-												</h2>
-											</td>
-
-											<td>
-												15 Nov 2019{" "}
-												<span className="text-primary d-block">
-													1.00 PM - 1.15 PM
-												</span>
-											</td>
-											<td>
-												<div className="status-toggle">
-													<input
-														type="checkbox"
-														id="status_5"
-														className="check"
-														checked
-													/>
-													<label htmlFor="status_5" className="checktoggle">
-														checkbox
-													</label>
-												</div>
-											</td>
-											<td className="text-right">$200.00</td>
 										</tr>
 									</tbody>
 								</table>

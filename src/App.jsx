@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import './App.css';
 import { loggedInUser } from './features/auth/authApiSlice';
 import router from './router/router';
-import { getPermission } from './features/user/userApiSlice';
+import { getAllRole, getPermission } from './features/user/userApiSlice';
 
 function App() {
 
@@ -22,6 +22,7 @@ useEffect(() => {
 
 	useEffect(() => {
 		dispatch(getPermission());
+		dispatch(getAllRole());
 	}, [dispatch]);
 
   return (

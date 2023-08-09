@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useFormsFields = (initialState) => {
+ const useFormsFields = (initialState) => {
 	const [input, setInput] = useState(initialState);
 
 	const handleInputchange = (e) => {
@@ -9,5 +9,11 @@ export const useFormsFields = (initialState) => {
 			[e.target.name]: e.target.value,
 		}));
 	};
-	return { input, handleInputchange };
+	const resetForm = () => {
+		setInput(initialState);
+	}
+	return { input, handleInputchange, resetForm, setInput };
 };
+
+
+export default  useFormsFields ;
