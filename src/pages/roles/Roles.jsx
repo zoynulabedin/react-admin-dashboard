@@ -36,9 +36,10 @@ const Roles = () => {
 			createRole({
 				name: input.name,
 				permissions: [...selected]
-			})
+			}),
+			resetForm(),
 		);
-		resetForm();
+		
 		setSelected([]);
 	};
 
@@ -161,7 +162,7 @@ const Roles = () => {
 												checked={selected?.includes(item.slug)}
 												value={item.slug}
 												name={item.slug}
-											/>{" "}
+											/>
 											{item.name}
 										</label>
 									);

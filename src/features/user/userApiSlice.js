@@ -157,9 +157,80 @@ export const createUser = createAsyncThunk("user/createUser", async (data) => {
 			"http://localhost:5050/api/v1/user/",
 			data
 		);
+		
+		return response.data;
+	} catch (error) {
+		throw new Error(error.response.data.message);
+	}
+});
+
+// user get all users
+
+export const getAllUsers = createAsyncThunk("user/getAllUsers", async () => {
+	try {
+		const response = await axios.get("http://localhost:5050/api/v1/user", {
+			withCredentials: true,
+		});
 
 		return response.data;
 	} catch (error) {
 		throw new Error(error.response.data.message);
 	}
 });
+
+// status update3 permission
+export const updateStatusUser = createAsyncThunk(
+	"user/updateStatusUser",
+	async ({ status, id }) => {
+		console.log(status, id);
+		try {
+			const response = await axios.patch(
+				`http://localhost:5050/api/v1/user/status/${id}`,
+				{ status },
+				{ withCredentials: true }
+			);
+
+			return response.data;
+		} catch (error) {
+			throw new Error(error.response.data.message);
+		}
+	}
+);
+
+
+// get user
+export const DeleteUser = createAsyncThunk("user/DeleteUser", async (id) => {
+	try {
+		const response = await axios.delete(
+			`http://localhost:5050/api/v1/user/${id}`,
+			{
+				withCredentials: true,
+			}
+		);
+
+		return response.data;
+	} catch (error) {
+		throw new Error(error.response.data.message);
+	}
+});
+
+
+
+// status update3 permission
+export const updateRoleUser = createAsyncThunk(
+	"user/updateRoleUser",
+	async ( data ) => {
+		console.log(data);
+		try {
+			const response = await axios.put(
+				`http://localhost:5050/api/v1/user/role/${data.id}`,
+				{ role: data.role , name: data.name } ,
+				{ withCredentials: true }
+			);
+			console.log(response.data);
+			return response.data;
+		} catch (error) {
+			throw new Error(error.response.data.message);
+		}
+	}
+);

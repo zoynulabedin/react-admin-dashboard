@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
 	DeleteRole,
+	DeleteUser,
 	createPermission,
 	createRole,
 	createUser,
 	deletePermission,
 	getAllRole,
+	getAllUsers,
 	getPermission,
 	updateRole,
+	updateRoleUser,
 	updateStatusPermission,
 	updateStatusRole,
+	updateStatusUser,
 } from "./userApiSlice";
 
 const userSlice = createSlice({
@@ -33,7 +37,7 @@ const userSlice = createSlice({
 			state.loading = true;
 		});
 		builder.addCase(createPermission.fulfilled, (state, action) => {
-			state.permission = action.permission ?? [];
+			
 			state.message = action.payload.message;
 			state.permission.push(action.payload.permission);
 			state.loading = false;
@@ -91,7 +95,6 @@ const userSlice = createSlice({
 			state.loading = true;
 		});
 		builder.addCase(createRole.fulfilled, (state, action) => {
-			state.role = action.role ?? [];
 			state.message = action.payload.message;
 			state.role.push(action.payload.role);
 		});
@@ -115,7 +118,7 @@ const userSlice = createSlice({
 			state.loading = true;
 		});
 		builder.addCase(DeleteRole.fulfilled, (state, action) => {
-			console.log(action);
+			console.log(action.payload);
 			state.role = state.role.filter(
 				(data) => data._id !== action.payload.role._id
 			);
@@ -159,12 +162,64 @@ const userSlice = createSlice({
 			state.loading = true;
 		});
 		builder.addCase(createUser.fulfilled, (state, action) => {
-			state.user = action.user ?? [];
+			// state.user = action.user ?? [];
 			state.message = action.payload.message;
-			state.role.push(action.payload.role);
+			state.user.push(action.payload.user);
 		});
 		builder.addCase(createUser.rejected, (state, action) => {
 			state.error = action.error.message;
+			state.loading = false;
+		});
+		builder.addCase(getAllUsers.pending, (state, action) => {
+			state.loading = true;
+		});
+		builder.addCase(getAllUsers.fulfilled, (state, action) => {
+			state.loading = false;
+			state.user = action.payload;
+		});
+		builder.addCase(getAllUsers.rejected, (state, action) => {
+			state.error = action.error.message;
+			state.loading = false;
+		});
+
+		builder.addCase(updateStatusUser.pending, (state, action) => {
+			state.loading = true;
+		});
+		builder.addCase(updateStatusUser.fulfilled, (state, action) => {
+			state.message = action.payload.message;
+			state.user[
+				state.user.findIndex((data) => data._id == action.payload.user._id)
+			] = action.payload.user;
+			state.loading = false;
+		});
+		builder.addCase(updateStatusUser.rejected, (state, action) => {
+			state.error = action.error.message;
+			state.loading = false;
+		});
+
+		builder.addCase(DeleteUser.pending, (state, action) => {
+			state.loading = true;
+		});
+		builder.addCase(DeleteUser.fulfilled, (state, action) => {
+			state.user = state.user.filter(
+				(data) => data._id !== action.payload.user._id
+			);
+			state.message = action.payload.message;
+		});
+			
+		builder.addCase(DeleteUser.rejected, (state, action) => {
+			state.error = action.error.message;
+			state.loading = false;
+		});
+		builder.addCase(updateRoleUser.pending, (state, action) => {
+			state.loading = true;
+		});
+		builder.addCase(updateRoleUser.fulfilled, (state, action) => {
+			console.log(action.payload);
+			state.message = action.payload.message;
+			state.user[
+				state.user.findIndex((data) => data._id == action.payload.user._id)
+			] = action.payload.user;
 			state.loading = false;
 		});
 	},
