@@ -36,6 +36,4 @@ export const timeAgo = (createdAt) => {
 	}
 };
 
-// Example usage:
-const createdAt = "2023-07-30T03:19:53.421+00:00";
-console.log(timeAgo(createdAt)); // Output: "just now" (if the time difference is less than a minute)
+

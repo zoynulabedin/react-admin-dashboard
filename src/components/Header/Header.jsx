@@ -18,7 +18,7 @@ const Header = () => {
 	const dispatch = useDispatch();
 const { user } = useAuth();
 
-console.log(user);
+
 	const { isOpen, toogleMenu, dorpDownRef } = useDropDownPopup();
 		const { isOpen:isNotification, toogleMenu:toogleMenuNotificatin, dorpDownRef:dropDownRefNotification } = useDropDownPopup();
 	const handleUserLoggout = (e) => {

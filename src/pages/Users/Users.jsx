@@ -9,6 +9,7 @@ import useFormsFields from "../../hooks/useFormsFields";
 import generateRandomPassword from "../../utility/generatePassword";
 import { timeAgo } from "../../utility/timeago";
 import { createToasity } from "../../utility/toastify";
+import PageHeader from "../../components/pageHeader/PageHeader";
 const Users = () => {
 	const dispatch = useDispatch();
 		const { user,role, error, message } = useSelector(getAllPermissions);
@@ -120,6 +121,7 @@ const updateUserRole = (e) => {
 
   return (
 		<>
+		<PageHeader title="Users"/>
 			<div className="row">
 				<div className="col-md-12">
 					<ModalPopup target="userModalPopup">

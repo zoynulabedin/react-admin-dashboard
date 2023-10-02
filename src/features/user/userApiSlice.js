@@ -55,7 +55,7 @@ export const deletePermission = createAsyncThunk(
 export const updateStatusPermission = createAsyncThunk(
 	"user/updateStatusPermission",
 	async ({ status, id }) => {
-		console.log(status, id);
+		
 		try {
 			const response = await axios.patch(
 				`http://localhost:5050/api/v1/permission/status/${id}`,
@@ -72,7 +72,7 @@ export const updateStatusPermission = createAsyncThunk(
 
 // create permission
 export const createRole = createAsyncThunk("user/createRole", async (data) => {
-	console.log(data);
+	
 	try {
 		const response = await axios.post(
 			"http://localhost:5050/api/v1/role",
@@ -119,7 +119,7 @@ export const DeleteRole = createAsyncThunk("user/DeleteRole", async (id) => {
 export const updateStatusRole = createAsyncThunk(
 	"user/updateStatusRole",
 	async ({ status, id }) => {
-		console.log(status, id);
+		
 		try {
 			const response = await axios.patch(
 				`http://localhost:5050/api/v1/role/status/${id}`,
@@ -182,7 +182,7 @@ export const getAllUsers = createAsyncThunk("user/getAllUsers", async () => {
 export const updateStatusUser = createAsyncThunk(
 	"user/updateStatusUser",
 	async ({ status, id }) => {
-		console.log(status, id);
+		
 		try {
 			const response = await axios.patch(
 				`http://localhost:5050/api/v1/user/status/${id}`,
@@ -220,14 +220,14 @@ export const DeleteUser = createAsyncThunk("user/DeleteUser", async (id) => {
 export const updateRoleUser = createAsyncThunk(
 	"user/updateRoleUser",
 	async ( data ) => {
-		console.log(data);
+		
 		try {
 			const response = await axios.put(
 				`http://localhost:5050/api/v1/user/role/${data.id}`,
 				{ role: data.role , name: data.name } ,
 				{ withCredentials: true }
 			);
-			console.log(response.data);
+			
 			return response.data;
 		} catch (error) {
 			throw new Error(error.response.data.message);

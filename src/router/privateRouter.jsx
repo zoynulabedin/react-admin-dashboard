@@ -1,6 +1,7 @@
 import Layout from "../components/Layout/Layout";
 import { Profile } from "../pages/Profile/Profile";
 import Users from "../pages/Users/Users";
+import Brand from "../pages/brand/Brand";
 import Dashboard from "../pages/dashboard/Dashboard";
 import  Permission  from "../pages/permission/Permission";
 import Roles from "../pages/roles/Roles";
@@ -29,6 +30,10 @@ const privateRouter = [
 					{
 						path: "/roles",
 						element: <Roles />,
+					},
+					{
+						path: "/brand",
+						element: <Brand />,
 					},
 					{
 						path: "/permission",

@@ -7,6 +7,7 @@ import { createPermission, deletePermission, updateStatusPermission } from "../.
 import { getAllPermissions, setMessageEmpty } from "../../features/user/userSlice";
 import { timeAgo } from "../../utility/timeago";
 import { createToasity } from "../../utility/toastify";
+import PageHeader from "../../components/pageHeader/PageHeader";
 const Permission = () => {
 	const dispatch = useDispatch();
 	const {permission,error, message} = useSelector(getAllPermissions);
@@ -64,6 +65,7 @@ const Permission = () => {
 
 	return (
 		<>
+		<PageHeader title="Permissions"/>
 			<div className="row">
 				<div className="col-md-12">
 					<ModalPopup target="userModalPopup">

@@ -9,6 +9,7 @@ import swal from "sweetalert";
 import useFormsFields from "../../hooks/useFormsFields";
 import { timeAgo } from "../../utility/timeago";
 import { createToasity } from "../../utility/toastify";
+import PageHeader from "../../components/pageHeader/PageHeader";
 
 const Roles = () => {
 	const dispatch = useDispatch();
@@ -99,6 +100,7 @@ const Roles = () => {
 
 	return (
 		<>
+		<PageHeader title="Roles"/>
 			<div className="row">
 				<div className="col-md-12">
 					<ModalPopup target="userModalPopup">

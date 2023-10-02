@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 import Sidebar from "../Sidebar/Sidebar";
-import useAuth from "../../hooks/useAuth";
+
 
 
 
 const Layout = () => {
 
-	const { user } = useAuth();
+
   return (
 		<>
 			<div className="main-wrapper">
@@ -17,16 +17,7 @@ const Layout = () => {
 
 				<div className="page-wrapper">
 					<div className="content container-fluid">
-						<div className="page-header">
-							<div className="row">
-								<div className="col-sm-12">
-									<h3 className="page-title">Welcome {user?.role}!</h3>
-									<ul className="breadcrumb">
-										<li className="breadcrumb-item active">Dashboard</li>
-									</ul>
-								</div>
-							</div>
-						</div>
+				
 
 						<Outlet/>
 					</div>
