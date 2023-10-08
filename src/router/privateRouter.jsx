@@ -5,6 +5,7 @@ import Brand from "../pages/brand/Brand";
 import Dashboard from "../pages/dashboard/Dashboard";
 import  Permission  from "../pages/permission/Permission";
 import Roles from "../pages/roles/Roles";
+import Tags from "../pages/tags/Tags";
 import PrivateGuard from "./privateGurad";
 
 // create private router
@@ -39,6 +40,10 @@ const privateRouter = [
 						path: "/permission",
 						element: <Permission />,
 					},
+					{
+						path: "/tag",
+						element: <Tags />,
+					}
 				],
 			},
 		],

@@ -55,7 +55,7 @@ const Sidebar = () => {
 							)}
 							{user?.role?.permissions.includes("tags") && (
 								<li>
-									<Link to="/users">
+									<Link to="/tag">
 										<i className="fe fe-users"></i> <span>Tags</span>
 									</Link>
 								</li>

@@ -8,9 +8,9 @@ import useFormsFields from "../../hooks/useFormsFields";
 import { timeAgo } from "../../utility/timeago";
 import { createToasity } from "../../utility/toastify";
 import PageHeader from "../../components/pageHeader/PageHeader";
-import { DeleteBrand, createBrand, updateStatusBrand } from "../../features/product/productApiSlice";
+import { DeleteBrand, UpdateSingleBrand, createBrand, updateStatusBrand } from "../../features/product/productApiSlice";
 import {getAllProductDatas,setMessageEmpty} from "../../features/product/productSlice";
-import { updateStatusUser } from "../../features/user/userApiSlice";
+
 const Brands =  () => {
 	const dispatch = useDispatch();
 		const { brand, error, message,loader } = useSelector(getAllProductDatas);
@@ -26,22 +26,27 @@ const Brands =  () => {
 
 const [logo, setLogo] = useState(null);
 const [logoPreview, setLogoPreview] = useState(null);
-
+const [editBrand, setEditBrand] = useState({});
+const [editlogoPreview, setEditLogoPreview] = useState(null);
+const [brandId, setBrandId] = useState(null);
 const HandleLogoPreview = (e) => {
 	const file = e.target.files[0];
-
+	
     if (file) {
       // Create a blob URL from the selected file
       const blobUrl = URL.createObjectURL(file);
 
       // Set the blob URL as the image source
     setLogoPreview(blobUrl);
+	setEditLogoPreview(blobUrl);
 	setLogo(file);
     }
 };
 
-const logoClear = () => {
+const logoClear = (e) => {
+	e.preventDefault();
 	setLogo(null);
+	setLogoPreview(null);
 }
 
 		useEffect(() => {
@@ -71,9 +76,44 @@ const logoClear = () => {
 		});
 	};
 
+	const handleEditBrand = (id) => {
+		const dataId = brand?.find((item) => item._id === id);
+		setEditBrand({
+			name: dataId.name,
+			
+		});
+		setBrandId(dataId._id);
+		setEditLogoPreview(dataId.logo);
+		
+	}
+
+	const handleEditBrandChange = (e) => {
+			
+		setEditBrand((prevState) => ({
+			...prevState,
+			[e.target.name]: e.target.value,
+		}));
+	};
 
 	const handleStatus = (status, id) => {
 		dispatch(updateStatusBrand({ status, id }));
+	};
+
+	const updateBrandRole = (e) => {
+		e.preventDefault();
+		console.log(loader);
+		const formdata = new FormData();
+		formdata.append("name", editBrand.name);
+		if(logo){
+			formdata.append("logo", logo);
+		}
+		
+		dispatch(
+			UpdateSingleBrand({
+				id: brandId,
+				formdata
+			})
+		);
 	};
 const HandleBrandSubmit = (e) => {
 	e.preventDefault();
@@ -98,6 +138,47 @@ const HandleBrandSubmit = (e) => {
 		<PageHeader title="Brand"/>
 			<div className="row">
 				<div className="col-md-12">
+				<ModalPopup target="brandEditModalPopup">
+						<h4>Edit Brand</h4>
+						<form onSubmit={updateBrandRole} >
+							<div className="my-3">
+								<input
+									type="text"
+									name="name"
+									value={editBrand?.name}
+									placeholder="User Name"
+									className="form-control"
+									onChange={handleEditBrandChange}
+								/>
+							</div>
+							<div className="my-3">
+								<input
+									type="file"
+									name="logo"
+									className="form-control"
+									onChange={HandleLogoPreview}
+								/>
+							
+								</div>
+								<div>
+								{editlogoPreview && (
+									<img
+									style={{width:"100%",height:"auto",objectFit:"cover"}}
+									src={editlogoPreview}
+									alt="Preview"
+									
+									/>
+								)}
+								</div>
+							
+
+							<div className="my-3">
+								<button type="submit" className="btn btn-primary btn-block">
+								{loader && (<span>Updating Please wait ...</span>) || (<span>Update</span>)}
+								</button>
+							</div>
+						</form>
+					</ModalPopup>
 					<ModalPopup target="userModalPopup">
 						<h4>Add New Brand</h4>
 						<form onSubmit={HandleBrandSubmit} method="POST" encType="multipart/form-data" >
@@ -131,8 +212,7 @@ const HandleBrandSubmit = (e) => {
 								)}
 								{logoPreview && (
 									<button onClick={logoClear}>Clear</button>
-								)}
-        					</div>
+								)}</div>
 						
 							<div className="my-3 text-center">
 								
@@ -196,8 +276,8 @@ const HandleBrandSubmit = (e) => {
 														</td>
 														<td className="text-right">
 															<button
-																
-																data-target="#userEditModalPopup"
+																onClick={() => handleEditBrand(item._id)}
+																data-target="#brandEditModalPopup"
 																data-toggle="modal"
 																className="btn btn-warning mr-1">
 																<i

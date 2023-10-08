@@ -8,7 +8,7 @@ import './App.css';
 import { loggedInUser } from './features/auth/authApiSlice';
 import router from './router/router';
 import { getAllRole, getAllUsers, getPermission } from './features/user/userApiSlice';
-import { getAllBrand } from './features/product/productApiSlice';
+import { getAllBrand, getTags } from './features/product/productApiSlice';
 
 function App() {
 
@@ -26,6 +26,7 @@ useEffect(() => {
 		dispatch(getAllRole());
 		dispatch(getAllUsers());
 		dispatch(getAllBrand());
+		dispatch(getTags());
 	}, [dispatch]);
 
   return (

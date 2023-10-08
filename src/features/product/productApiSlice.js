@@ -71,3 +71,82 @@ export const updateStatusBrand = createAsyncThunk(
 		}
 	}
 );
+
+
+// update brand
+export const UpdateSingleBrand = createAsyncThunk(
+	"product/UpdateSingleBrand",
+	async (data) => {
+
+		try {
+			const response = await axios.put(
+				`http://localhost:5050/api/v1/brand/${data.id}`,
+				data.formdata ,
+				{ withCredentials: true }
+			);
+			console.log(response.data);
+			return response.data;
+			
+		} catch (error) {
+			throw new Error(error.response.data.message);
+		}
+	}
+);
+
+
+//  create tags
+export const createTag = createAsyncThunk(
+	"product/createTag",
+	async (data) => {
+		
+		try {
+			const response = await axios.post(
+				"http://localhost:5050/api/v1/tags",
+				data,{withCredentials:true}
+			);
+
+			return response.data;
+		} catch (error) {
+			throw new Error(error.response.data.message);
+		}
+	}
+);
+
+// get tags
+
+
+
+// tags
+export const getTags = createAsyncThunk(
+	"product/getTags",
+	async () => {
+		
+		try {
+			const response = await axios.get(
+				"http://localhost:5050/api/v1/tags",{withCredentials:true}
+			);
+			console.log(response.data);
+			return response.data;
+		} catch (error) {
+			throw new Error(error.response.data.message);
+		}
+	}
+);
+
+// delete tags
+// tags
+export const deleteTags = createAsyncThunk(
+	"product/deleteTags",
+	async (id) => {
+		
+		try {
+			const response = await axios.delete(
+				`http://localhost:5050/api/v1/tags/${id}`,{withCredentials:true}
+			);
+			
+			return response.data;
+		} catch (error) {
+			throw new Error(error.response.data.message);
+		}
+	}
+);
